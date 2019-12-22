@@ -14,3 +14,5 @@ java -jar target\async-profiler-project-0.0.1-SNAPSHOT.jar
 mvn spring-boot:run
 
 http://localhost:8080/images/1001
+
+docker exec -ti 3555aaeea80f /usr/local/async-profiler/profiler.sh -d 30 -o collapsed -e itimer -f /tmp/collapsed.txt 1
