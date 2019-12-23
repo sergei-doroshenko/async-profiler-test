@@ -1,19 +1,15 @@
 # On Windows work in cmd under Admin, possible via bash
-# docker build -t sdoroshenko/alpine-async-profiler .
-#
-# docker run --it -rm -v $(pwd):/project -p 8080:8080 sdoroshenko/alpine
-# docker run -it --rm -v %cd%:/project -p 8080:8080 sdoroshenko/alpine-async-profiler
-#
+# docker build -t sdoroshenko/ubuntu-async-profiler .
+# docker run -it --rm -v $(pwd):/project -p 8080:8080 sdoroshenko/ubuntu-async-profiler
+# docker run -it --rm -v %cd%:/project -p 8080:8080 --name async-profiler sdoroshenko/ubuntu-async-profiler
 #
 # ^M is a carriage return character. Linux uses the line feed character to mark the end of a line
 #
-FROM alpine:latest
-RUN apk update
-RUN apk fetch openjdk8
-RUN apk add --no-cache --upgrade bash util-linux pciutils usbutils coreutils binutils findutils grep openjdk8
+FROM ubuntu:latest
+RUN apt-get update && apt-get install unzip openjdk-8-dbg wget -y
 
 RUN mkdir /usr/local/async-profiler/ &&\
-      wget -O /usr/local/async-profiler/async-profiler.tar.gz https://github.com/jvm-profiling-tools/async-profiler/releases/download/v1.5/async-profiler-1.5-linux-x64.tar.gz &&\
+      wget -O /usr/local/async-profiler/async-profiler.tar.gz https://github.com/jvm-profiling-tools/async-profiler/releases/download/v1.6/async-profiler-1.6-linux-x64.tar.gz &&\
       cd /usr/local/async-profiler/ &&\
       tar -xvzf async-profiler.tar.gz &&\
       rm -f /usr/local/async-profiler/async-profiler.tar.gz
@@ -28,17 +24,9 @@ RUN mkdir /usr/local/flame-graph/ &&\
     rm -Rf FlameGraph-1b1c6deede9c33c5134c920bdb7a44cc5528e9a7 &&\
     rm -f /usr/local/flame-graph/flame-graph.zip
 
-COPY target/async-profiler-test.jar /opt/
-COPY *.sh /opt/
-
-RUN chmod +x /opt/*.sh
-
 VOLUME /project
-WORKDIR /opt
+WORKDIR /project
 
 EXPOSE 8080
 
-# ------------------------------------------------------------- Grant execution permissions
-#RUN apt-get update && apt-get install unzip openjdk-8-dbg -y && chmod +x /opt/*.sh
-
-CMD ["sh", "-c", "/opt/start.sh"]
+CMD bash
