@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @RestController
 public class ImageController {
@@ -26,10 +25,12 @@ public class ImageController {
     public byte[] getImage(@PathVariable("id") String id) throws IOException {
         String fileName = "img" + File.separator + id + ".png";
         Resource resource = resourceLoader.getResource("classpath:" + fileName);
-        InputStream inputStream = resource.getInputStream();
+        InputStream in = resource.getInputStream();
 
         try {
-            return FileCopyUtils.copyToByteArray(inputStream);
+            ByteArrayOutputStream out = new ByteArrayOutputStream(StreamUtils.BUFFER_SIZE);
+            StreamUtils.copy(in, out);
+            return out.toByteArray();
         } catch (IOException e) {
             LOGGER.error("IOException", e);
         }

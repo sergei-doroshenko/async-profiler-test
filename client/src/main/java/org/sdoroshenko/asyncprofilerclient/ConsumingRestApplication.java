@@ -14,7 +14,7 @@ public class ConsumingRestApplication {
 
     public static void main(String[] args) {
         RestTemplate restTemplate = new RestTemplateBuilder().build();
-        IntStream.range(0, 10).forEach(i -> {
+        IntStream.range(0, 1000000).forEach(i -> {
             byte[] bytes = restTemplate.getForObject("http://localhost:8080/images/1001", byte[].class);
             log.info("len: " + bytes.length);
         });

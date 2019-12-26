@@ -20,7 +20,7 @@ $ docker exec -it async-profiler bash
 Package and run:
 ```bash
 $ mvn package
-$ java -jar async-profiler-test.jar
+$ java -jar app/target/async-profiler-test.jar
 ```
 or use spring-boot maven plugin:
 ```bash
@@ -48,7 +48,7 @@ docker exec -ti 3555aaeea80f /usr/local/async-profiler/profiler.sh -d 30 -o coll
 profiler.sh: line 63: /build/jattach: No such file or directory
 ###Links
 https://vimeo.com/364039638   
-https://www.reddit.com/r/java/comments/dtvpr6/memory_footprint_of_a_java_process_by_andrei
-https://www.youtube.com/watch?v=c755fFv1Rnk
+https://www.reddit.com/r/java/comments/dtvpr6/memory_footprint_of_a_java_process_by_andrei  
+https://www.youtube.com/watch?v=c755fFv1Rnk  
 https://stackoverflow.com/questions/53576163/interpreting-jemaloc-data-possible-off-heap-leak/53598622   
 
