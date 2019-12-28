@@ -6,11 +6,11 @@ $ docker build -t sdoroshenko/alpine-async-profiler .
 ```
 Run container on Linux:
 ```bash
-$ docker run -it --rm -v $(pwd):/project -p 8080:8080 --name async-profiler sdoroshenko/alpine-async-profiler
+$ docker run -it --rm -v $(pwd):/project -p 8080:8080 --name async-profiler --cap-add SYS_ADMIN sdoroshenko/alpine-async-profiler
 ```
 Run container on Windows:
 ```bash
-$ docker run -it --rm -v %cd%:/project -p 8080:8080 --name async-profiler sdoroshenko/alpine-async-profiler
+$ docker run -it --rm -v %cd%:/project -p 8080:8080 --name async-profiler --cap-add SYS_ADMIN sdoroshenko/alpine-async-profiler
 ```
 Connect to the container:
 ```bash
@@ -32,6 +32,9 @@ http://localhost:8080/images/1001
 ```
 ###Try profiler
 ```bash
+$ ps aux
+$ pmap -x 67
+
 ./profiler.sh -d <duration> -e malloc -f malloc.svg <pid>  
 ./profiler.sh -d 10 -e malloc -f /project/malloc.svg 31  
 

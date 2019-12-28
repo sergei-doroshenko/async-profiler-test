@@ -11,3 +11,5 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 .idea
 async-profiler-test.iml
+app/app.iml
+client/client.iml

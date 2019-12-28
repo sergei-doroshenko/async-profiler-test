@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Random;
 import java.util.stream.IntStream;
 
 
@@ -14,10 +15,10 @@ public class ConsumingRestApplication {
 
     public static void main(String[] args) {
         RestTemplate restTemplate = new RestTemplateBuilder().build();
-        IntStream.range(0, 1000000).forEach(i -> {
-            byte[] bytes = restTemplate.getForObject("http://localhost:8080/images/1001", byte[].class);
+        while (true) {
+            int k = (new Random().nextInt()) % 2 == 0 ? 1 : 2;
+            byte[] bytes = restTemplate.getForObject("http://localhost:8080/images/100" + k, byte[].class);
             log.info("len: " + bytes.length);
-        });
+        }
     }
-
 }
