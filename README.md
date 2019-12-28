@@ -42,6 +42,8 @@ $ pmap -x 67
 ./profiler.sh -d <duration> -e mmap -f mmap.svg <pid>
 
 profiler.sh -d 10 -e malloc -f /project/malloc.svg 11
+profiler.sh -d 10 -e mprotect -f /project/mprotect.svg 6
+
 profiler.sh -e wall -t -i 5ms -f /project/result.svg 11
 
 docker exec -ti 3555aaeea80f /usr/local/async-profiler/profiler.sh -d 30 -o collapsed -e itimer -f /tmp/collapsed.txt 1

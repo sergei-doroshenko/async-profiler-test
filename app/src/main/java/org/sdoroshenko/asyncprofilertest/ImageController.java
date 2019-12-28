@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +22,9 @@ public class ImageController {
 
     @GetMapping(value = "/images/{id}")
     public byte[] getImage(@PathVariable("id") String id) throws IOException {
-        String fileName = "img" + File.separator + id + ".png";
-        Resource resource = resourceLoader.getResource("classpath:" + fileName);
-        InputStream in = resource.getInputStream();
+        String fileName = "/img" + File.separator + id + ".png";
+//        Resource resource = resourceLoader.getResource("classpath:" + fileName);
+        InputStream in = getClass().getResourceAsStream(fileName);
 
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream(StreamUtils.BUFFER_SIZE);
