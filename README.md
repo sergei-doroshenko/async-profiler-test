@@ -19,7 +19,7 @@ $ docker exec -it async-profiler bash
 ###Try web application
 Package and run:
 ```bash
-$ mvn package
+$ mvn clean package
 $ java -jar app/target/async-profiler-test.jar
 ```
 or use spring-boot maven plugin:
@@ -29,6 +29,10 @@ $ mvn spring-boot:run
 Connect:
 ```bash
 http://localhost:8080/images/1001
+```  
+or start client:
+```cmd
+java -jar client\target\async-profiler-client.jar
 ```
 ###Try profiler
 ```bash

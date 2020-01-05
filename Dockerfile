@@ -9,7 +9,6 @@
 #
 FROM alpine:latest
 
-
 RUN apk update &&\
       apk add --no-cache --upgrade bash libc6-compat perl openjdk8-dbg coreutils findutils grep
 
@@ -33,6 +32,8 @@ VOLUME /project
 WORKDIR /project
 
 EXPOSE 8080
+
+
 
 #CMD ["sh", "-c", "/opt/start.sh"]
 CMD bash
